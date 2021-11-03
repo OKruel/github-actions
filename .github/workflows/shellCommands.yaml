@@ -1,0 +1,23 @@
+# Github Actions run every job in a different virtual machine created specially for it.
+# Is possible to run jobs sequentially or simultaneasly
+
+# Name of the github workflow that will be displayed in Github Actions
+name: Shell Commands
+# Array of events in which a specific job will be performed
+on: [push]
+# Jobs is an object and a name must be given to the object key.
+jobs:
+  # Name of the job
+  run-shell-command:
+    # Operating system in which the virtual machine will run
+    runs-on: ubuntu-20.04
+    # Steps that will take place. In this case some simple bash commands
+    steps:
+      # Name of the command
+      - name: echo a script
+        # Command itself
+        run: echo Hello World
+      - name: multiline script
+        run: |
+          node -v
+          npm -v

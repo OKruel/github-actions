@@ -1,6 +1,6 @@
-#! EXAMPLE TO RUN ACTIONS
-#* Notice that the Actions DO NOT COPY the files from the repository to the Virtual Machine.
-#* This copy procedure must be done either manually or by bringing in the checkout action
+# EXAMPLE TO RUN ACTIONS
+# Notice that the Actions DO NOT COPY the files from the repository to the Virtual Machine.
+# This copy procedure must be done either manually or by bringing in the checkout action
 
 name: Actions workflow
 # Object (can also be an array) that specifies in which Github EVENTS the jobs will be triggerred

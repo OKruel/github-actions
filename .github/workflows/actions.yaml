@@ -39,6 +39,6 @@ jobs:
           # This is the input
           who-to-greet: Olavo
 
-      # - name: Log the time of the Greeting
-      #   # Steps becomes a bash object that can be accessed through that syntax
-      #   run: ${{ steps.greet.outputs.time }}
+      - name: Log the time of the Greeting
+        # Steps becomes a bash object that can be accessed through that syntax
+        run: ${{ steps.greet.outputs.time }}

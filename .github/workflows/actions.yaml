@@ -21,7 +21,7 @@ jobs:
 
       # Bring in the action that copies the files to the virtual machine,
       - name: Github CHECKOUT ACTION - bring in the repo files
-        uses: actions/checkout@latest # <user/repository>@<EITHER VERSION OR COMMIT OR BRANCH>
+        uses: actions/checkout@v2.4.0 # <user/repository>@<EITHER VERSION OR COMMIT OR BRANCH>
 
       # Check if the repository files are inside the virtual machine after CHECKOUT
       - name: AFTER CHECKOUT ACTION - List files inside the virtual machine
@@ -39,6 +39,6 @@ jobs:
           # This is the input
           who-to-greet: Olavo
 
-      - name: Log the time of the Greeting
-        # Steps becomes a bash object that can be accessed through that syntax
-        run: ${{ steps.greet.outputs.time }}
+      # - name: Log the time of the Greeting
+      #   # Steps becomes a bash object that can be accessed through that syntax
+      #   run: ${{ steps.greet.outputs.time }}

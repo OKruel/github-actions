@@ -10,6 +10,7 @@ jobs:
   # Name of the job
   run-shell-command:
     # Operating system in which the virtual machine will run
+    # In a linux OS the shell is automatically bash
     runs-on: ubuntu-20.04
     # Steps that will take place. In this case some simple bash commands
     steps:
@@ -25,3 +26,12 @@ jobs:
         run: |
           import platform
           print(platform.processor())
+        # Specifying the shell
+        shell: python
+  # Name of the second job
+  run-windows-commands:
+    runs-on: windows-latest
+    steps:
+      - name: echo a bash script in windows
+        run: echo bash script in a windows machine
+        shell: bash

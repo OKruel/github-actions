@@ -1,9 +1,11 @@
 # Github Actions run every job in a different virtual machine created specially for it.
 # Is possible to run jobs sequentially or simultaneasly
 
+#! EXAMPLE TO RUN TERMINAL COMMANDS
 # Name of the github workflow that will be displayed in Github Actions
 name: Shell Commands
 # Array of events in which a specific job will be performed
+# Can also be a object
 on: [push]
 # Jobs is an object and a name must be given to the object key.
 jobs:
@@ -19,7 +21,7 @@ jobs:
         # Command itself
         run: echo Hello World
       - name: multiline script
-        run: |
+        run: | # The pipe symbols allows to run multiple commands
           node -v
           npm -v
       - name: pythons commands
@@ -31,7 +33,14 @@ jobs:
   # Name of the second job
   run-windows-commands:
     runs-on: windows-latest
+    # Will only run after the jobs listed inside this array
+    needs: ['run-shell-command']
     steps:
       - name: echo a bash script in windows
         run: echo bash script in a windows machine
+        shell: bash
+      - name: get location in power shell
+        run: Get-Location
+      - name: PWD
+        run: pwd
         shell: bash

@@ -1,6 +1,7 @@
-# EXAMPLE TO RUN ACTIONS
+#! EXAMPLE TO RUN ACTIONS
 # Notice that the Actions DO NOT COPY the files from the repository to the Virtual Machine.
 # This copy procedure must be done either manually or by bringing in the checkout action
+# Github has an oficial ready to use Actions repository -> https://github.com/actions/
 
 name: Actions workflow
 # Object (can also be an array) that specifies in which Github EVENTS the jobs will be triggerred
@@ -13,22 +14,28 @@ jobs:
   github-actions:
     runs-on: ubuntu-latest
     steps:
-      # Check if the repository files are inside the virtual machine
-      - name: BEFORE CHECKOUT ACTION - List files inside the virtual machine
+      # [COMMAND] Exposes the  environment variables automatically created in the virtual machine
+      - name: GITHUB ENV VARIABLES
+        # SHA = current commit;
+        # github.token = your personal token used to authenticate to your repo (SSH)
         run: |
-          pwd
-          ls -la
+          echo $GITHUB_SHA 
+          echo $GITHUB_REPOSITORY
+          echo $GITHUB_NAMESPACE
+          echo "{{ github.token }}"
 
-      # Bring in the action that copies the files to the virtual machine,
+      # [ACTION] Copies all files to inside the github virtual machine
       - name: Github CHECKOUT ACTION - bring in the repo files
+        # Name of the repository to use the code.
         uses: actions/checkout@v2.4.0 # <user/repository>@<EITHER VERSION OR COMMIT OR BRANCH>
 
-      # Check if the repository files are inside the virtual machine after CHECKOUT
+      # [COMMAND] Check if the my repository files are inside the virtual machine after CHECKOUT ACTION
       - name: AFTER CHECKOUT ACTION - List files inside the virtual machine
         run: |
           pwd
           ls -la
-      # name of the step
+
+      # [ACTION] Receives and input and print it to the console
       - name: Simple Javascript Action
         # Code inside a repository to execute/build/test
         uses: actions/hello-world-javascript-action@v1 # <user/repository>@<EITHER VERSION OR COMMIT OR BRANCH>
@@ -39,6 +46,7 @@ jobs:
           # This is the input
           who-to-greet: Olavo
 
+      #[COMMAND] Command to test the sintax to acces other steps from this workflow
       - name: Log the time of the Greeting
-        # Steps becomes a bash object that can be accessed through that syntax
-        run: ${{ steps.greet.outputs.time }}
+        # Steps becomes an object that can be accessed through the following syntax
+        run: echo "${{ steps.greet.outputs.time }}"

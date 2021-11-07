@@ -21,8 +21,8 @@ jobs:
         run: |
           echo $GITHUB_SHA 
           echo $GITHUB_REPOSITORY
-          echo $GITHUB_NAMESPACE
-          echo "{{ github.token }}"
+          echo $GITHUB_WORKSPACE
+          echo "${{ github.token }}"
 
       # [ACTION] Copies all files to inside the github virtual machine
       - name: Github CHECKOUT ACTION - bring in the repo files

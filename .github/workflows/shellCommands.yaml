@@ -6,7 +6,7 @@
 name: Shell Commands
 # Array of events in which a specific job will be performed
 # Can also be a object
-on: [push]
+on: [pull_request]
 # Jobs is an object and a name must be given to the object key.
 jobs:
   # Name of the job

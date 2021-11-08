@@ -8,7 +8,8 @@ name: Actions workflow
 # Object (can also be an array) that specifies in which External or Github EVENTS the jobs will be triggerred
 on:
   # Events can be dispatch manually by making a post request to a URL.
-  # This request must contain an authorization token to your repo.
+  # The format of the url is: https://api.github.com/respos/<user>/<repository>/dispatches
+  # This request Header must contain as Basic Authorization github token to access Github API.
   # This token can be generated in the settings -> developer settings > personal access tokens
   # Docs https://docs.github.com/en/rest/reference/repos#create-a-repository-dispatch-event
   repository_dispatch:
@@ -38,15 +39,21 @@ jobs:
   github-actions:
     runs-on: ubuntu-latest
     steps:
+      # [COMMAND] Exposes the github object and the "client_payload" key sended in the body of the request
+      - name: GITHUB OBJECT
+        run: |
+          echo "${{ github }}"
+          echo "${{ github.event.client_payload }}"
+          echo "${{ github.event.client_payload.env }}"
+
       # [COMMAND] Exposes the  environment variables automatically created in the virtual machine
-      - name: GITHUB ENV VARIABLES
+      - name: GITHUB AUTOMATICALLY ENV VARIABLES
         # SHA = current commit;
         # github.token = your personal token used to authenticate to your repo (SSH)
         run: |
           echo $GITHUB_SHA 
           echo $GITHUB_REPOSITORY
           echo $GITHUB_WORKSPACE
-          echo "${{ github.token }}"
 
       # [ACTION] Copies all files to inside the github virtual machine
       - name: Github CHECKOUT ACTION - bring in the repo files

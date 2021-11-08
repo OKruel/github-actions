@@ -18,12 +18,12 @@ on:
     types: [build]
 
   # CRON Jobs - The schedule works exacty like Linux Cron jobs
-  #* schedule:
+  #? schedule:
   # CRON job utility tool -> https://crontab.guru/
   # Is possible to set several CRON jobs
   # Minimum time aceptable to GITHUB is 5min to 5min
-  #* - cron: '0/5 * * * *'
-  #* - cron: '* * * * * '
+  #? - cron: '0/5 * * * *'
+  #? - cron: '* * * * * '
 
   # Every push (branch not specified) will trigger the jobs
   # push:
@@ -39,7 +39,7 @@ jobs:
   github-actions:
     runs-on: ubuntu-latest
     steps:
-      # [COMMAND] Exposes the github object and the "client_payload" key sended in the body of the request
+      # [COMMAND] Exposes the github object and the "client_payload" key inside the github object sended in the body of the request
       - name: GITHUB OBJECT
         run: |
           echo "${{ github }}"

@@ -2,12 +2,36 @@
 # Notice that the Actions DO NOT COPY the files from the repository to the Virtual Machine.
 # This copy procedure must be done either manually or by bringing in the checkout action
 # Github has an oficial ready to use Actions repository -> https://github.com/actions/
+# Events that can trigger a workflow https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows
 
 name: Actions workflow
-# Object (can also be an array) that specifies in which Github EVENTS the jobs will be triggerred
+# Object (can also be an array) that specifies in which External or Github EVENTS the jobs will be triggerred
 on:
-  push:
+  # Events can be dispatch manually by making a post request to a URL.
+  # This request must contain an authorization token to your repo.
+  # This token can be generated in the settings -> developer settings > personal access tokens
+  # Docs https://docs.github.com/en/rest/reference/repos#create-a-repository-dispatch-event
+  repository_dispatch:
+    # You can add any string here as a type.
+    # In the body of the post request the string must be sent. {"event_type": "build"}
+    types: ['build']
+
+  # CRON Jobs - The schedule works exacty like Linux Cron jobs
+  #* schedule:
+  # CRON job utility tool -> https://crontab.guru/
+  # Is possible to set several CRON jobs
+  # Minimum time aceptable to GITHUB is 5min to 5min
+  #* - cron: '0/5 * * * *'
+  #* - cron: '* * * * * '
+
+  # Every push (branch not specified) will trigger the jobs
+  # push:
+  #! IMPORTANT - When a PR is open Github will create internally a REF branch version .
+  #! The REF consists in an actual merge.
+  #! The JOBS will then run in the MERGED CODE
+  #! This happens for all types in pull_request
   pull_request:
+    # Indicated which pull requests events will trigger the jobs
     types: [closed, assigned, opened, reopened]
 
 jobs:

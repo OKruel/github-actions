@@ -14,7 +14,7 @@ on:
   repository_dispatch:
     # You can add any string here as a type.
     # In the body of the post request the string must be sent. {"event_type": "build"}
-    types: ['build']
+    types: [build]
 
   # CRON Jobs - The schedule works exacty like Linux Cron jobs
   #* schedule:

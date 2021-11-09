@@ -47,8 +47,8 @@ on:
     tags:
       - v1.*
     # Paths indicate certain types of files that must be changed to trigger the workflow
-    #? paths:
-    #?   - '**.js'
+    paths:
+      - '**.js'
 
   #! IMPORTANT - When a PR is open Github will create internally a REF branch version .
   #! The REF consists in an actual merge.

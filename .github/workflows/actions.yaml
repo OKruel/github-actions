@@ -47,6 +47,7 @@ on:
     tags:
       - v1.*
     # Paths indicate certain types of files that must be changed to trigger the workflow
+    # Regex patterns and path-ignore can also be used
     #! Branches and tags will trigger if ONE of their options are true.
     #! Path are excludent. If the PATH is not true event if BRANCHES and TAGS are try nothing will be triggered
     paths:

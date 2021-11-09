@@ -44,8 +44,8 @@ on:
     #? branches-ignore:
     #? - development
     # Tags works EXACTLY the same as branches.
-    #? tags:
-    #?   - v1.*
+    tags:
+      - v1.*
     # Paths indicate certain types of files that must be changed to trigger the workflow
     #? paths:
     #?   - '**.js'

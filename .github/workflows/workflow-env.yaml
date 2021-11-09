@@ -13,4 +13,4 @@ jobs:
     steps:
       - name: Read the self configured environment variables
         run: |
-          echo WL: "${ WF_ENV }"
+          echo WL: "${{ WF_ENV }}"

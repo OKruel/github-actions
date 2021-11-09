@@ -1,4 +1,5 @@
 name: Workflow Environment Variables
+
 on:
   push:
     branches:
@@ -17,6 +18,6 @@ jobs:
         env:
           STEP_ENV: Available only in this STEP
         run: |
-          echo WL_ENV: "${{ WF_ENV }}"
-          echo JOB_ENV: "${{ JOB_ENV }}"
-          echo STEP_ENV: "${{ STEP_ENV }}"
+          echo "WL_ENV: ${WF_ENV}"
+          echo "JOB_ENV: ${JOB_ENV}"
+          echo "STEP_ENV: ${STEP_ENV}"

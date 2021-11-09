@@ -36,9 +36,9 @@ on:
       - master
       # All branches that obey the following regex pattern
       # https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet
-      #? - 'feature/*'
-      #? - 'feature/**' # will match nestes branch names
-      #? - '!NotWantedPattern' # Exclamation in the begin indicates to IGNORE branch with this patterns
+      - 'feature/*'
+      - 'feature/**' # will match nestes branch names
+      - '!NotWantedPattern' # Exclamation in the begin indicates to IGNORE branch with this patterns
     # Will run on all branch except the ones listed here
     # A regex pattern can also be used
     #? branches-ignore:

@@ -26,14 +26,40 @@ on:
   #? - cron: '* * * * * '
 
   # Every push (branch not specified) will trigger the jobs
-  # push:
+  #? push:
+
+  # Trigger by push events to a specific branch
+  # All the options to trigger events can be used also with pull request
+  push:
+    #! branches and branches-igonore can not be used at the same time
+    branches:
+      - master
+      # All branches that obey the following regex pattern
+      # https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet
+      - 'feature/*'
+      - 'feature/**' # will match nestes branch names
+      - '!NotWantedPattern' # Exclamation in the begin indicates to IGNORE branch with this patterns
+    # Will run on all branch except the ones listed here
+    # A regex pattern can also be used
+    #? branches-ignore:
+    #? - development
+    # Tags works EXACTLY the same as branches.
+    tags:
+      - v1.*
+    # Paths indicate certain types of files that must be changed to trigger the workflow
+    paths:
+      - '**.js'
+
   #! IMPORTANT - When a PR is open Github will create internally a REF branch version .
   #! The REF consists in an actual merge.
   #! The JOBS will then run in the MERGED CODE
   #! This happens for all types in pull_request
   pull_request:
-    # Indicated which pull requests events will trigger the jobs
+    # Triggering the jobs by pull requests events.
     types: [closed, assigned, opened, reopened]
+    # Triggering the jobs by specific branches
+    branches:
+      - master
 
 jobs:
   github-actions:

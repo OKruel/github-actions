@@ -51,7 +51,7 @@ on:
     #! Path are excludent. If the PATH is not true event if BRANCHES and TAGS are try nothing will be triggered
     paths:
       - '**.js'
-      - '*'
+      - '**.*'
 
   #! IMPORTANT - When a PR is open Github will create internally a REF branch version .
   #! The REF consists in an actual merge.

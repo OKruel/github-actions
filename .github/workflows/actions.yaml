@@ -80,6 +80,7 @@ jobs:
       - name: GITHUB AUTOMATICALLY ENV VARIABLES
         # SHA = current commit;
         # github.token = your personal token used to authenticate to your repo (SSH)
+        # https://docs.github.com/en/actions/learn-github-actions/environment-variables
         run: |
           echo $GITHUB_SHA 
           echo $GITHUB_REPOSITORY

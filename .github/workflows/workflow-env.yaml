@@ -7,7 +7,8 @@ on:
 # Environment variable has scopes. It can be global, job scoped or step scoped.
 env:
   WF_ENV: Available for all jobs
-  #! You can also set the environment variables inside Github by using the secrets configurations inside the repository.
+  # Environment variables can be set inside Github's repository.
+  # Those variables are encripted
   #! <username>/<repository>/settings/secrets/actions
   WF_ENV_FROM_GITHUB: ${{ secrets.WF_ENV_FROM_GITHUB }}
 

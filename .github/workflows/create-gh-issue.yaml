@@ -39,7 +39,7 @@ jobs:
           git add .
           git commit -m "added another random file"
           echo ============
-          git push
+          # git push
 
       - name: Create issue using Github api
         run: echo Commented the code to not create issues while testing

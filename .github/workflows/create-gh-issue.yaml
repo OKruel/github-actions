@@ -8,7 +8,14 @@ on:
 jobs:
   create-github-issue:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     steps:
+      - name: Accessing variables
+        run: |
+          echo ${{ github }}
+          echo ${{ secrets }}
+
       - name: Create issue using Github api
         run: |
           curl --request POST \
@@ -17,6 +24,6 @@ jobs:
           --header 'content-type: application/json' \
           --data '{
             "title": "Automated issue for commit: ${{ github.sha }}",
-            "body": "This issue was automatically created by the Guthub Action workflow **${{ github.workflow }}**". /n/n The commit hash was: _${{ github.sha }}_
+            "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
             }' \
           --fail

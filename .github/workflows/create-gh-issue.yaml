@@ -16,7 +16,7 @@ jobs:
         # How to add you token to authorize the virtual machine to clone the repository
         run: |
           pwd
-          ll -la
+          ls -a
           echo "============"
           git init
           git remote add origin "https://${GITHUB_ACTOR}:${{ github.token }}@github.com/${{github.repository}}.git"
@@ -27,10 +27,10 @@ jobs:
           git branch --set-upstream-to=origin/master
           git pull
           echo "============"
-          ll -la
+          ls -a
           echo $RANDOM >> random.txt
           echo "============"
-          ll -la
+          ls -a
           git add .
           git commit -m "added random file"
           git push

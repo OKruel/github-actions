@@ -69,24 +69,7 @@ jobs:
   github-actions:
     runs-on: ubuntu-latest
     steps:
-      # [COMMAND] Exposes the github object and the "client_payload" key inside the github object sended in the body of the request
-      - name: GITHUB OBJECT
-        run: |
-          echo "${{ github }}"
-          echo "${{ github.event.client_payload }}"
-          echo "${{ github.event.client_payload.env }}"
-
-      # [COMMAND] Exposes the  environment variables automatically created in the virtual machine
-      - name: GITHUB AUTOMATICALLY ENV VARIABLES
-        # SHA = current commit;
-        # github.token = your personal token used to authenticate to your repo (SSH)
-        # https://docs.github.com/en/actions/learn-github-actions/environment-variables
-        run: |
-          echo $GITHUB_SHA 
-          echo $GITHUB_REPOSITORY
-          echo $GITHUB_WORKSPACE
-
-      # [ACTION] Copies all files to inside the github virtual machine
+      # [ACTION 1] Copies all files to inside the github virtual machine
       - name: Github CHECKOUT ACTION - bring in the repo files
         # Name of the repository to use the code.
         uses: actions/checkout@v2.4.0 # <user/repository>@<EITHER VERSION OR COMMIT OR BRANCH>
@@ -97,7 +80,7 @@ jobs:
           pwd
           ls -la
 
-      # [ACTION] Receives and input and print it to the console
+      # [ACTION 2] Receives and input and print it to the console
       - name: Simple Javascript Action
         # Code inside a repository to execute/build/test
         uses: actions/hello-world-javascript-action@v1 # <user/repository>@<EITHER VERSION OR COMMIT OR BRANCH>

@@ -8,7 +8,7 @@ on:
     types: [build]
 # Environment variable has scopes. It can be global, job scoped or step scoped.
 env:
-  WF_ENV: Available for all jobs
+  WF_ENV: Environment variable available for all jobs
   # Environment variables can be set inside Github's repository.
   # Those variables are encripted
   #! <username>/<repository>/settings/secrets/actions
@@ -18,17 +18,42 @@ jobs:
   workflow_env_variables:
     runs-on: ubuntu-latest
     env:
-      JOB_ENV: Available only in THIS JOB
+      JOB_ENV: Environment variable available only in THIS JOB
     steps:
-      - name: Self configured in file environment variables
+      - name: Configured in file env variables
         env:
-          STEP_ENV: Available only in this STEP
+          STEP_ENV: Environment variable available only in this STEP
         run: |
           echo "WL_ENV: ${WF_ENV}"
           echo "JOB_ENV: ${JOB_ENV}"
           echo "STEP_ENV: ${STEP_ENV}"
           echo "${{ github.event.client_payload.env }}"
-      - name: Self configured in Github env variables
+
+      - name: Configured in GITHUB env variables
         run: |
           echo "WF_ENV_FROM_GITHUB: ${{ secrets.WF_ENV_FROM_GITHUB }}"
           echo "${{ github.event.client_payload.env }}"
+      # [COMMAND]
+      # Environment variables automatically created in the virtual machine by Github
+      # https://docs.github.com/en/actions/learn-github-actions/environment-variables
+      - name: Default Github env Variables
+        run: |
+          echo "HOME: ${HOME}"
+          echo "GITHUB_WORKFLOW: ${GITHUB_WORKFLOW}"
+          echo "GITHUB_ACTION: ${GITHUB_ACTION}"
+          echo "GITHUB_ACTIONS: ${GITHUB_ACTIONS}"
+          echo "GITHUB_ACTOR: ${GITHUB_ACTOR}"
+          echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}"
+          echo "GITHUB_EVENT_NAME: ${GITHUB_EVENT_NAME}"
+          echo "GITHUB_WORKSPACE: ${GITHUB_WORKSPACE}"
+          echo "GITHUB_SHA: ${GITHUB_SHA}"
+          echo "GITHUB_REF: ${GITHUB_REF}"
+
+      # In the repository_dispatch event, is possible to send data as a JSON object with the key as 'client_payload'
+      - name: Github Objects
+        run: |
+          echo "Github SHA: ${{ github }}"
+          echo "Github token from secrets: ${{ secrets.GITHUB_TOKEN }}"
+          echo "Github token from github: ${{ github.token }}"
+          echo ${{ steps }}
+          echo ${{ github.event.client_payload.env }}

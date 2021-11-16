@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       issues: write
+      contents: write
     steps:
       - name: Cloning the repository
         #! Atention to the URL.
@@ -32,7 +33,6 @@ jobs:
           ls -a
           echo ============
           git add .
-          echo ============
           git commit -m "added random file"
           echo ============
           git push

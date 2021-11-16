@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+  repository_dispatch:
+    types: [build]
 # Environment variable has scopes. It can be global, job scoped or step scoped.
 env:
   WF_ENV: Available for all jobs
@@ -25,6 +27,8 @@ jobs:
           echo "WL_ENV: ${WF_ENV}"
           echo "JOB_ENV: ${JOB_ENV}"
           echo "STEP_ENV: ${STEP_ENV}"
+          echo "${{ github.event.client_payload.env }}"
       - name: Self configured in Github env variables
         run: |
           echo "WF_ENV_FROM_GITHUB: ${{ secrets.WF_ENV_FROM_GITHUB }}"
+          echo "${{ github.event.client_payload.env }}"

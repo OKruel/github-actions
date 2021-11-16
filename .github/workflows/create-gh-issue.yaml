@@ -17,7 +17,7 @@ jobs:
         run: |
           pwd
           ll -la
-          echo ============
+          echo "============"
           git init
           git remote add origin "https://${{ github.actor }}:${{ github.token }}@github.com/${{github.repository}}.git"
           git config --global user.email "my-bot@my-bot.com"
@@ -26,10 +26,10 @@ jobs:
           git checkout master
           git branch --set-upstream-to=origin/master
           git pull
-          echo ============
+          echo "============"
           ll -la
           echo $RANDOM >> random.txt
-          echo ============
+          echo "============"
           ll -la
           git add .
           git commit -m "added random file"

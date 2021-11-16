@@ -17,22 +17,23 @@ jobs:
         run: |
           pwd
           ls -a
-          echo "============"
+          echo ============
           git init
-          git remote add origin "https://${GITHUB_ACTOR}:${{ github.token }}@github.com/${{github.repository}}.git"
+          git remote add origin "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${{github.repository}}.git"
           git config --global user.email "my-bot@my-bot.com"
           git config --global user.name "my-bot"
           git fetch
           git checkout master
           git branch --set-upstream-to=origin/master
           git pull
-          echo "============"
           ls -a
+          echo ============
           echo $RANDOM >> random.txt
-          echo "============"
           ls -a
+          echo ============
           git add .
           git commit -m "added random file"
+          echo ============
           git push
 
       - name: Create issue using Github api

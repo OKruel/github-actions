@@ -8,6 +8,8 @@ on:
 jobs:
   create-github-issue:
     runs-on: ubuntu-latest
+    #! Atention to the permissions to handle github
+    # Those permissions overwrite
     permissions:
       issues: write
       contents: write
@@ -20,9 +22,9 @@ jobs:
           ls -a
           echo ============
           git init
-          git remote add origin "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${{github.repository}}.git"
-          git config --global user.email ${{ secrets.USER_EMAIL }}
-          git config --global user.name ${{ secrets.USER_NAME }}
+          git remote add origin "https://${github.actor}:${{ github.token }}@github.com/${{github.repository}}.git"
+          git config --global user.email "my-bot@my-bot.com"
+          git config --global user.name "my-bot"
           git fetch
           git checkout master
           git branch --set-upstream-to=origin/master
@@ -33,19 +35,19 @@ jobs:
           ls -a
           echo ============
           git add .
-          git commit -m "added random file"
+          git commit -m "added another random file"
           echo ============
           git push
 
       - name: Create issue using Github api
-        run: echo I do not want to create an issue all the time I am testing
-        # run: |
-        #   curl --request POST \
-        #   --url https://api.github.com/repos/${{ github.repository }}/issues \
-        #   --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-        #   --header 'content-type: application/json' \
-        #   --data '{
-        #     "title": "Automated issue for commit: ${{ github.sha }}",
-        #     "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
-        #     }' \
-        #   --fail
+        run: echo Commented the code to not create issues while testing
+        #? run: |
+        #?   curl --request POST \
+        #?   --url https://api.github.com/repos/${{ github.repository }}/issues \
+        #?   --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+        #?   --header 'content-type: application/json' \
+        #?   --data '{
+        #?     "title": "Automated issue for commit: ${{ github.sha }}",
+        #?     "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
+        #?     }' \
+        #?   --fail

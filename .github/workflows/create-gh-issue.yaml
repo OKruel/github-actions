@@ -11,10 +11,29 @@ jobs:
     permissions:
       issues: write
     steps:
-      - name: Accessing variables
+      - name: Cloning the repository
+        #! Atention to the URL.
+        # How to add you token to authorize the virtual machine to clone the repository
         run: |
-          echo ${{ github }}
-          echo ${{ secrets }}
+          pwd
+          ll -la
+          echo ============
+          git init
+          git remote add origin "https://${{ github.actor }}:${{ github.token }}@github.com/${{github.repository}}.git"
+          git config --global user.email "my-bot@my-bot.com"
+          git config --global user.name "my-bot"
+          git fetch
+          git checkout master
+          git branch --set-upstream-to=origin/master
+          git pull
+          echo ============
+          ll -la
+          echo $RANDOM >> random.txt
+          echo ============
+          ll -la
+          git add .
+          git commit -m "added random file"
+          git push
 
       - name: Create issue using Github api
         run: echo I do not want to create an issue all the time I am testing

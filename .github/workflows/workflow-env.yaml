@@ -32,7 +32,6 @@ jobs:
       - name: Configured in GITHUB env variables
         run: |
           echo "WF_ENV_FROM_GITHUB: ${{ secrets.WF_ENV_FROM_GITHUB }}"
-          echo "${{ github.event.client_payload.env }}"
       # [COMMAND]
       # Environment variables automatically created in the virtual machine by Github
       # https://docs.github.com/en/actions/learn-github-actions/environment-variables
@@ -52,7 +51,7 @@ jobs:
       # In the repository_dispatch event, is possible to send data as a JSON object with the key as 'client_payload'
       - name: Github Objects
         run: |
-          echo "Github SHA: ${{ github }}"
+          echo "Github SHA: ${{ github.sha }}"
           echo "Github token from secrets: ${{ secrets.GITHUB_TOKEN }}"
           echo "Github token from github: ${{ github.token }}"
           echo ${{ steps }}

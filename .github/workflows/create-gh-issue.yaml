@@ -9,7 +9,7 @@ jobs:
   create-github-issue:
     runs-on: ubuntu-latest
     #! Atention to the permissions to handle github
-    # Those permissions overwrite
+    # Those permissions overwrite the ones set in the repository
     permissions:
       issues: write
       contents: write
@@ -17,6 +17,8 @@ jobs:
       - name: Cloning the repository
         #! Atention to the URL.
         # How to add you token to authorize the virtual machine to clone the repository
+        # Guide to the github.token permissions
+        # https://docs.github.com/en/actions/security-guides/automatic-token-authentication
         run: |
           pwd
           ls -a

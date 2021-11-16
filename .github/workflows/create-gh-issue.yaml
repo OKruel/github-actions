@@ -22,7 +22,7 @@ jobs:
           ls -a
           echo ============
           git init
-          git remote add origin "https://${github.actor}:${{ github.token }}@github.com/${{github.repository}}.git"
+          git remote add origin "https://${{ github.actor }}:${{ github.token }}@github.com/${{github.repository}}.git"
           git config --global user.email "my-bot@my-bot.com"
           git config --global user.name "my-bot"
           git fetch

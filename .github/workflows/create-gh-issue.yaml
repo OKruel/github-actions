@@ -43,6 +43,7 @@ jobs:
 
       - name: Create issue using Github api
         run: echo Commented the code to not create issues while testing
+        # Sets of commands to access the github api with the env variables and create a issue. The same as you could do by using the command line (which would be really cool).
         #? run: |
         #?   curl --request POST \
         #?   --url https://api.github.com/repos/${{ github.repository }}/issues \

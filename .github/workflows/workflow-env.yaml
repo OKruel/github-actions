@@ -5,7 +5,7 @@ on:
     branches:
       - master
   repository_dispatch:
-    types: [build]
+    types: [environments]
 # Environment variable has scopes. It can be global, job scoped or step scoped.
 env:
   WF_ENV: Environment variable available for all jobs

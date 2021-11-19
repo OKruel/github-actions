@@ -15,12 +15,6 @@ env:
   WF_ENV_FROM_GITHUB: ${{ secrets.WF_ENV_FROM_GITHUB }}
 
 jobs:
-  # decrypt_secret_files:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/
-  #   env:
-  #     PASSPHRASE: ${{ secrets.ENCRYPTION_PASSPHRASE }}
   workflow_env_variables:
     runs-on: ubuntu-latest
     env:
@@ -77,9 +71,8 @@ jobs:
         # The quiet option is to prevent big output dialog in the logs
         # The batch option is to prevent interactions with the user since we are not able to enter inputs
         # The yes option is to answer yes into any interaction that might occur
-        # run: |
-        #   gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" --output $HOME/secret.json secretToEncrypt.json.gpg
-        run: echo ${{ secrets.ENCRYPTION_PASSPHRASE}}
+        run: |
+          gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" --output $HOME/secret.json secretToEncrypt.json.gpg
 
       # Check if the file was correctly decrypted
       - name: Confirming decryption

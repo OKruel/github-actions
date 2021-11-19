@@ -48,14 +48,6 @@ jobs:
           echo "GITHUB_SHA: ${GITHUB_SHA}"
           echo "GITHUB_REF: ${GITHUB_REF}"
 
-      # - name: Github Contexts
-      #   run: |
-      #     echo "Github SHA: ${{ github.sha }}"
-      #     echo "Github token from secrets: ${{ secrets.GITHUB_TOKEN }}"
-      #     echo "Github token from github: ${{ github.token }}"
-      #     echo ${{ steps }}
-      #     echo ${{ github.event.client_payload.env }}
-
   #! ANOTHER JOB
   Decrypt_file_job:
     runs-on: ubuntu-latest

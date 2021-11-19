@@ -1,5 +1,9 @@
 # Github store values in objects that are called CONTEXTS
-# In the repository_dispatch event, is possible to send data as a JSON object with the key as 'client_payload'
+#! The ${{}} syntax
+# This evaluates an expression, it can be a boolean, calculation, function, value of a object
+#* REMEMBER
+# Transforming and object to JSON is the way to deeply clone nexted objects.
+# It is also a way to display deeply nestes objects in the console.
 name: Github Contexts Objects
 on:
   push:
@@ -25,6 +29,7 @@ jobs:
 
       - name: Dump Steps Context
         env:
+          # To access the steps context the step must have and ID
           STEPS: ${{ toJson(steps) }}
         run: echo "STEPS CONTEXT - ${STEPS}"
 

@@ -1,0 +1,15 @@
+name: Github Actions Functions
+on:
+  push:
+    branches:
+      - master
+jobs:
+  Functions_Examples:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Functions
+        run: |
+          echo ${{ contains( 'hello', '11') }}
+          echo ${{ startsWith( 'hello', 'he') }}
+          echo ${{ endsWith( 'hello', 'lo') }}
+          echo ${{ format( 'hello {0} {1} {2}', 'World', '!', '!') }}

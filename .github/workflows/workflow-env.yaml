@@ -69,7 +69,7 @@ jobs:
         env:
           PASSPHRASE: ${{ secrets.ENCRYPTION_PASSPHRASE }}
         # The quiet option is to prevent big output dialog in the logs
-        # The batch option is to prevent interactions with the user since we are not able to enter inputs
+        # The batch option is to prevent interactions from the GPG command since we can't enter inputs
         # The yes option is to answer yes into any interaction that might occur
         run: |
           gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" --output $HOME/secret.json secretToEncrypt.json.gpg

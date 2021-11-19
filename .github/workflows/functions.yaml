@@ -3,13 +3,40 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    # Triggering the jobs by pull requests events.
+    types: [closed, assigned, opened, reopened]
+    # Triggering the jobs by specific branches
+    branches:
+      - master
 jobs:
   Functions_Examples:
     runs-on: ubuntu-latest
+    #! This is an evaluation express just like the ${{}}
+    # The ${{}} syntax is not needed here
+    # The if evalutation expression can also be used inside the steps
+    if: github.event_name == 'push'
     steps:
       - name: Functions
         run: |
-          echo ${{ contains( 'hello', '11') }}
+          echo ${{ contains( 'hello', 'll') }}
           echo ${{ startsWith( 'hello', 'he') }}
           echo ${{ endsWith( 'hello', 'lo') }}
           echo ${{ format( 'hello {0} {1} {2}', 'World', '!', '!') }}
+
+      - name: Run if previous step SUCCED
+        if: success()
+        run: echo "Previous step succed"
+
+      - name: Wrong step
+        run: eccho "Meant to fail"
+
+      - name: Run if previous step fail
+        # This function is made to run a step if the previous failed
+        if: failure()
+        run: echo "Previous step failed"
+
+      - name: Always run
+        # This function is made to run a step if the previous failed
+        if: always()
+        run: echo "This step will always regardlees of what happens in the workflow"

@@ -58,22 +58,22 @@ jobs:
           echo ${{ github.event.client_payload.env }}
 
   #! ANOTHER JOB
-  # Decrypt_file_job:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     # Github setup action to copy the repo into the VM
-  #     - uses: actions/checkout
+  Decrypt_file_job:
+    runs-on: ubuntu-latest
+    steps:
+      # Github setup action to copy the repo into the VM
+      - uses: actions/checkout
 
-  #     # Command to descrypt the file with the secret
-  #     - name: Command to decrypt file
-  #       env:
-  #         PASSPHRASE: ${{ secrets.ENCRYPTION_PASSPHRASE }}
-  #       # The quiet option is to prevent big output dialog in the logs
-  #       # The batch option is to prevent interactions with the user since we are not able to enter inputs
-  #       # The yes option is to answer yes into any interaction that might occur
-  #       run: |
-  #         gpg --quiet --batch --yes --decrypt --passphrase="${PASSPHRASE}" --output "${HOME}/secret.json" secretToEncrypt.json.gpg
+      # Command to descrypt the file with the secret
+      - name: Command to decrypt file
+        env:
+          PASSPHRASE: ${{ secrets.ENCRYPTION_PASSPHRASE }}
+        # The quiet option is to prevent big output dialog in the logs
+        # The batch option is to prevent interactions with the user since we are not able to enter inputs
+        # The yes option is to answer yes into any interaction that might occur
+        run: |
+          gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" --output $HOME/secret.json secretToEncrypt.json.gpg
 
-  #     # Check if the file was correctly decrypted
-  #     - name: Confirming decryption
-  #       run: cat $HOME/secret.json
+      # Check if the file was correctly decrypted
+      - name: Confirming decryption
+        run: cat $HOME/secret.json

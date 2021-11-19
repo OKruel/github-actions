@@ -48,14 +48,13 @@ jobs:
           echo "GITHUB_SHA: ${GITHUB_SHA}"
           echo "GITHUB_REF: ${GITHUB_REF}"
 
-      # In the repository_dispatch event, is possible to send data as a JSON object with the key as 'client_payload'
-      - name: Github Objects
-        run: |
-          echo "Github SHA: ${{ github.sha }}"
-          echo "Github token from secrets: ${{ secrets.GITHUB_TOKEN }}"
-          echo "Github token from github: ${{ github.token }}"
-          echo ${{ steps }}
-          echo ${{ github.event.client_payload.env }}
+      # - name: Github Contexts
+      #   run: |
+      #     echo "Github SHA: ${{ github.sha }}"
+      #     echo "Github token from secrets: ${{ secrets.GITHUB_TOKEN }}"
+      #     echo "Github token from github: ${{ github.token }}"
+      #     echo ${{ steps }}
+      #     echo ${{ github.event.client_payload.env }}
 
   #! ANOTHER JOB
   Decrypt_file_job:

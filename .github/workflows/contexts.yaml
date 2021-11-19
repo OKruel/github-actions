@@ -1,0 +1,41 @@
+# Github store values in objects that are called CONTEXTS
+# https://docs.github.com/en/actions/learn-github-actions/contexts
+# In the repository_dispatch event, is possible to send data as a JSON object with the key as 'client_payload'
+name: Github Contexts Objects
+on:
+  push:
+    branches:
+      - master
+jobs:
+  Dump_Contexts_Objects:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump Github Context
+        env:
+          GITHUB: ${{ toJson(github) }}
+        run: echo "GITHUB CONTEXT - ${GITHUB}"
+
+      - name: Dump Jobs Context
+        env:
+          JOBS: ${{ toJson(jobs) }}
+        run: echo "JOBS CONTEXT - ${JOBS}"
+
+      - name: Dump Steps Context
+        env:
+          STEPS: ${{ toJson(steps) }}
+        run: echo "STEPS CONTEXT - ${STEPS}"
+
+      - name: Dump Runner Context
+        env:
+          RUNNER: ${{ toJson(runner) }}
+        run: echo "RUNNER CONTEXT - ${RUNNER}"
+
+      - name: Dump Strategy Context
+        env:
+          STRATEGY: ${{ toJson(strategy) }}
+        run: echo "STRATEGY CONTEXT - ${STRATEGY}"
+
+      - name: Dump Matrix Context
+        env:
+          MATRIX: ${{ toJson(matrix) }}
+        run: echo "MATRIX CONTEXT - ${MATRIX}"

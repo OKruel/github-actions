@@ -33,7 +33,7 @@ on:
   push:
     #! branches and branches-igonore can not be used at the same time
     branches:
-      - master
+      #? - master
       # All branches that obey the following regex pattern
       # https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet
       - 'feature/*'
@@ -49,7 +49,7 @@ on:
     # Paths indicate certain types of files that must be changed to trigger the workflow
     # Regex patterns and path-ignore can also be used
     #! Branches and tags will trigger if ONE of their options are true.
-    #! Path are excludent. If the PATH is not true event if BRANCHES and TAGS are try nothing will be triggered
+    #! Paths are excludent. If the PATH is not true, even if BRANCHES and TAGS are true nothing will be triggered
     paths:
       - '**.js'
       - '**.*'

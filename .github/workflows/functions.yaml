@@ -47,10 +47,9 @@ jobs:
     # Can wait for multiple jobs since it is an array
     if: github.event_name == 'push'
     steps:
-      - name: Test Job Step
+      - name: Made to fail
         run: |
-          echo This step has no errors
-          echo This will not run if the previous step have an error
+          eccho This step must fail and make the job fail
 
   Useful_Commands:
     runs-on: ubuntu-latest

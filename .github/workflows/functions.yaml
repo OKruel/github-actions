@@ -41,23 +41,21 @@ jobs:
         if: always()
         run: echo "This step will always regardlees of what happens in the workflow"
 
-  Test_Job:
-    runs-on: ubuntu-latest
-    # Makes the job run in paralel only after the job described there finishes.
-    # Can wait for multiple jobs since it is an array
-    if: github.event_name == 'push'
-    steps:
-      - name: Made to fail
-        run: |
-          eccho This step must fail and make the job fail
+      - name: Run regardeless of other steps fail
+        # This function is made to run a step if any of the steps have failed
+        continue-on-error: true
+        run: echo "This step will run even if othet steps fail always regardlees of what happens in the workflow"
+        # This must not run because we have failed steps in the job
+      - name: This is step must not run
+        run: echo "This step must not run"
 
   Useful_Commands:
     runs-on: ubuntu-latest
-    # Makes the job run in paralel only after the job described there finishes.
+    # Makes the jobs run in a desired sequence.
+    needs: ['Functions_Examples']
     # Can wait for multiple jobs since it is an array
     # needs: ['Function_Examples']
     if: github.event_name == 'push'
-    needs: ['Functions_Examples']
     steps:
       - name: This is not suppose to because of failure in one of the previous job
         run: echo Simple Example

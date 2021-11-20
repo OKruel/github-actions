@@ -22,7 +22,7 @@ jobs:
           echo ${{ contains( 'hello', 'll') }}
           echo ${{ startsWith( 'hello', 'he') }}
           echo ${{ endsWith( 'hello', 'lo') }}
-          echo ${{ format( 'hello {0} {1} {2}', 'World', '!', '!') }}
+          echo ${{ format( 'Hello {0} {1} {2}', 'World', '!', '!') }}
 
       - name: Run if previous step SUCCED
         if: success()
@@ -40,3 +40,24 @@ jobs:
         # This function is made to run a step if the previous failed
         if: always()
         run: echo "This step will always regardlees of what happens in the workflow"
+
+  Test_Job:
+    runs-on: ubuntu-latest
+    # Makes the job run in paralel only after the job described there finishes.
+    # Can wait for multiple jobs since it is an array
+    if: github.event_name == "push"
+    steps:
+      - name: Test Job Step
+        run: |
+          echo This step has no errors
+          echo This will not run if the previous step have an error
+
+  Useful_Commands:
+    runs-on: ubuntu-latest
+    # Makes the job run in paralel only after the job described there finishes.
+    # Can wait for multiple jobs since it is an array
+    # needs: ['Function_Examples']
+    if: github.event_name == "push"
+    steps:
+      - name: This is not suppose to because of failure in one of the previous job
+        run: echo Simple Example

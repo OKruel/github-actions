@@ -50,6 +50,8 @@ jobs:
 
   #! ANOTHER JOB
   Decrypt_file_job:
+    #! ATENTION another way to decrypt secrets by Github
+    #https://docs.github.com/en/actions/security-guides/encrypted-secrets
     runs-on: ubuntu-latest
     steps:
       # Github setup action to copy the repo into the VM

@@ -57,7 +57,7 @@ jobs:
     # Makes the job run in paralel only after the job described there finishes.
     # Can wait for multiple jobs since it is an array
     # needs: ['Function_Examples']
-    if: github.event_name == "push"
+    if: github.event_name == 'push'
     steps:
       - name: This is not suppose to because of failure in one of the previous job
         run: echo Simple Example

@@ -1,0 +1,19 @@
+# Matrix is made to run the jobs in different conditions.
+# It can be a different OS, or a different node or python version
+name: Matrix
+on: push
+jobs:
+  change-node-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log node version
+        run: node -v
+
+      # Github Action => https://github.com/actions/setup-node
+      - uses: actions/setup-node@v2.4.1
+        # This action takes an input by using the with keyword
+        with:
+          node-version: 6
+
+      - name: Log node version
+        run: node -v

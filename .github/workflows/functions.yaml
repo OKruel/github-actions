@@ -57,6 +57,11 @@ jobs:
     # Can wait for multiple jobs since it is an array
     # needs: ['Function_Examples']
     if: github.event_name == 'push'
+    # Maximun of minutes the job can take before Github cancels it
+    # Can also be used in steps
+    timeout-minutes: 360
     steps:
-      - name: This is not suppose to because of failure in one of the previous job
-        run: echo Simple Example
+      - name: This JOB only runs if previous dependent job has a continue-on-error in the job level
+        run: echo Continue-on-error exists in a JOB level
+        # Maximun of minutes the step can take before Github cancels it
+        timeout-minutes: 360

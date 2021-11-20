@@ -53,6 +53,7 @@ jobs:
     runs-on: ubuntu-latest
     # Makes the jobs run in a desired sequence.
     needs: ['Functions_Examples']
+    continue-on-error: true
     # Can wait for multiple jobs since it is an array
     # needs: ['Function_Examples']
     if: github.event_name == 'push'

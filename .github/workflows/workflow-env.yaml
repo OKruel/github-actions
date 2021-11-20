@@ -1,9 +1,9 @@
 name: Workflow Environment Variables
 
 on:
-  push:
-    branches:
-      - master
+  #? push:
+  #?   branches:
+  #?     - master
   repository_dispatch:
     types: [environments]
 # Environment variable has scopes. It can be global, job scoped or step scoped.

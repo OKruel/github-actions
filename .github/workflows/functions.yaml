@@ -1,8 +1,8 @@
 name: Github Actions Functions
 on:
-  push:
-    branches:
-      - master
+  #? push:
+  #?   branches:
+  #?     - master
   pull_request:
     # Triggering the jobs by pull requests events.
     types: [closed, assigned, opened, reopened]

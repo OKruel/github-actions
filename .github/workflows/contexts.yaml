@@ -6,9 +6,11 @@
 # It is also a way to display deeply nestes objects in the console.
 name: Github Contexts Objects
 on:
-  push:
-    branches:
-      - master
+  #? push:
+  #?   branches:
+  #?     - master
+  pull_request:
+    types: [opened]
 jobs:
   # There are more contexts than those.
   # https://docs.github.com/en/actions/learn-github-actions/contexts

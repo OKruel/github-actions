@@ -1,10 +1,33 @@
-# Matrix is made to run the jobs in different conditions.
+# Strategy is made to run the jobs in different conditions.
 # It can be a different OS, or a different node or python version
 name: Matrix
 on: push
 jobs:
   change-node-version:
-    runs-on: ubuntu-latest
+    # Strategy is made to run the same job in different environments
+    strategy:
+      matrix:
+        #! All keyss can be any name
+        # The job will run 3 times, each in one of the node versions indicated in the array
+        multiple_node_versions: [8, 10]
+        os: [macos-latest, ubuntu-latest]
+        # This will exclude options for the matrix to run.
+        exclude:
+          # Array that takes excludent conditions.
+          - os: ubuntu-latest
+            multiple_node_versions: 8
+        # Include is made to add variables into specific jobs of the matrix
+        include:
+          - os: macos-latest
+            multiple_node_versions: 10
+            myVariable: 'This is my variable'
+      # When true, if one of the 3 jobs fails, the other ones will not be executed.
+      # When false, the jobs will run in parallel regardelles of the results
+      fail-fast: true
+      # Limits the number of jobs that can be runned in parallel
+      max-parallel: 2
+
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Log node version
         run: node -v
@@ -13,7 +36,7 @@ jobs:
       - uses: actions/setup-node@v2.4.1
         # This action takes an input by using the with keyword
         with:
-          node-version: 6
+          node-version: ${{ matrix.multiple_node_versions }}
 
       - name: Log node version
         run: node -v

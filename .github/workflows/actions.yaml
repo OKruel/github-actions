@@ -43,13 +43,14 @@ on:
     # A regex pattern can also be used
     #? branches-ignore:
     #? - development
-    # Tags works EXACTLY the same as branches.
+    #! Tags are completentary of branches.
+    # The tag will only be checked if the condition of branches is true.
     tags:
       - v1.*
     # Paths indicate certain types of files that must be changed to trigger the workflow
     # Regex patterns and path-ignore can also be used
     #! Branches and tags will trigger if ONE of their options are true.
-    #! Paths are excludent. If the PATH is not true, even if BRANCHES and TAGS are true nothing will be triggered
+    #! Paths are completentary of branches. The path option will only be checked if the condition of branches is true.
     paths:
       - '**.js'
       - '**.*'

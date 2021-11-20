@@ -12,6 +12,8 @@ on:
 jobs:
   Functions_Examples:
     runs-on: ubuntu-latest
+    # All other dependent jobs will continue if this job fails
+    continue-on-error: true
     #! This is an evaluation express just like the ${{}}
     # The ${{}} syntax is not needed here
     # The if evalutation expression can also be used inside the steps
@@ -28,8 +30,10 @@ jobs:
         if: success()
         run: echo "Previous step succed"
 
-      - name: Wrong step
+      - name: Step Meant to fail
         run: eccho "Meant to fail"
+        #! If THIS STEP FAILS all other will continue normally
+        continue-on-error: true
 
       - name: Run if previous step fail
         # This function is made to run a step if the previous failed
@@ -41,19 +45,14 @@ jobs:
         if: always()
         run: echo "This step will always regardlees of what happens in the workflow"
 
-      - name: Run regardeless of other steps fail
-        # This function is made to run a step if any of the steps have failed
-        continue-on-error: true
-        run: echo "This step will run even if othet steps fail always regardlees of what happens in the workflow"
         # This must not run because we have failed steps in the job
-      - name: This is step must not run
-        run: echo "This step must not run"
+      - name: This is step must not run except if continue on error exists
+        run: echo "Continue on error exists"
 
   Useful_Commands:
     runs-on: ubuntu-latest
     # Makes the jobs run in a desired sequence.
     needs: ['Functions_Examples']
-    continue-on-error: true
     # Can wait for multiple jobs since it is an array
     # needs: ['Function_Examples']
     if: github.event_name == 'push'

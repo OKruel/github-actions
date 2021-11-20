@@ -33,10 +33,11 @@ jobs:
       - name: Step Meant to fail
         run: eccho "Meant to fail"
         #! If THIS STEP FAILS all other will continue normally
-        continue-on-error: true
+        # continue-on-error: true
 
       - name: Run if previous step fail
         # This function is made to run a step if the previous failed
+        # The continue-on-error makes the previous step NOT FAIL
         if: failure()
         run: echo "Previous step failed"
 

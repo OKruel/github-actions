@@ -1,0 +1,19 @@
+name: Using_Containers
+on: push
+jobs:
+  docker-container:
+    runs-on: ubuntu-latest
+    container:
+      image: node:17-alpine
+      ports:
+        - 3000
+      env:
+        myVariable: 'This is my variable'
+      #? volumes:
+      #?   - "sdfd"
+
+    steps:
+      - name: Log Node version
+        run: |
+          node -v
+          cat /etc/os-release

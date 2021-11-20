@@ -1,7 +1,7 @@
 # Strategy is made to run the jobs in different conditions.
 # It can be a different OS, or a different node or python version
 name: Matrix
-on: push
+on: pull_request
 jobs:
   change-node-version:
     # Strategy is made to run the same job in different environments
@@ -16,7 +16,7 @@ jobs:
           # Array that takes excludent conditions.
           - os: ubuntu-latest
             multiple_node_versions: 8
-        # Include is made to add variables into specific jobs of the matrix
+        # Include is made to add extra configutation (e.g. variables) into specific jobs of the matrix
         include:
           - os: macos-latest
             multiple_node_versions: 10

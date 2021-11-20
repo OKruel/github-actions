@@ -57,6 +57,7 @@ jobs:
     # Can wait for multiple jobs since it is an array
     # needs: ['Function_Examples']
     if: github.event_name == 'push'
+    needs: ['Functions_Examples']
     steps:
       - name: This is not suppose to because of failure in one of the previous job
         run: echo Simple Example

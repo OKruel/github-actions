@@ -45,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     # Makes the job run in paralel only after the job described there finishes.
     # Can wait for multiple jobs since it is an array
-    if: github.event_name == "push"
+    if: github.event_name == 'push'
     steps:
       - name: Test Job Step
         run: |

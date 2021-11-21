@@ -30,7 +30,7 @@ jobs:
         run: |
           curl --request POST \
           --header 'content-type: application/json' \
-          --data '{\"username\": \"Hello\", \"address\": \"World\"}' \
+          --data '{"username": "Hello", "address": "World"}' \
           --url http://localhost:3001/api/users
 
       - name: Testing a GET request

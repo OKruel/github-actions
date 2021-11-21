@@ -2,13 +2,21 @@
 name: Using_Containers
 on: push
 jobs:
-  docker-multiple-containers-STEPS:
+  docker-containers-STEPS-and-JOBS:
     runs-on: ubuntu-latest
     container:
-      # Dummy comment here
-      image: node:17-alpine
+      image: node:16-alpine
+      ports:
+        - 3000
+      env:
+        myVariable: 'This is my variable'
+      #? volumes:
+      #?   - "sdfd"
     steps:
-      - name: Step with docker container
+      - name: Log node version from JOB level docker container
+        run: node -v
+      #! Run commands inside a docker container in STEP level can only be done by using the ENTRYPOINT, CMD keywords of a dockerfile.
+      - name: Log node version from STEP level docker container
         # The uses keyword can be used with actions or docker containers
         uses: docker://node:17-alpine
         # The with keyword is used to add input
@@ -17,30 +25,6 @@ jobs:
           entrypoint: /bin/echo
           # This would act like the CMD command to add more parameters to the entrypoint command.
           args: Hello World
-
-      - name: Another step with another docker container
-        # The uses keyword can be used with actions or docker containers
-        uses: docker://node:17-alpine
-        # The with keyword is used to add input
-        with:
-          # works exactly as the entrypoint keyword in a docker file
-          entrypoint: /usr/local/bin/node
-          # This would act like the CMD command to add more parameters to the entrypoint command.
-          args: -v
-
-  docker-single-container-JOB:
-    runs-on: ubuntu-latest
-    container:
-      image: node:17-alpine
-      ports:
-        - 3000
-      env:
-        myVariable: 'This is my variable'
-      #? volumes:
-      #?   - "sdfd"
-    steps:
-      - name: Log node version
-        run: node -v
 
   docker-multiple-containers-JOB:
     runs-on: ubuntu-latest

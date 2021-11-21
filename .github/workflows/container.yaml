@@ -15,16 +15,15 @@ jobs:
     steps:
       - name: Log node version from JOB level docker container
         run: node -v
-      #! Run commands inside a docker container in STEP level can only be done by using the ENTRYPOINT, CMD keywords of a dockerfile.
+      #! Run commands inside a docker container in STEP level can only be done by using the ENTRYPOINT, CMD keywords of a docker file.
       - name: Log node version from STEP level docker container
-        # The uses keyword can be used with actions or docker containers
         uses: docker://node:17-alpine
         # The with keyword is used to add input
         with:
           # works exactly as the entrypoint keyword in a docker file
-          entrypoint: /bin/echo
+          entrypoint: /usr/local/bin/node
           # This would act like the CMD command to add more parameters to the entrypoint command.
-          args: Hello World
+          args: -v
 
   docker-multiple-containers-JOB:
     runs-on: ubuntu-latest

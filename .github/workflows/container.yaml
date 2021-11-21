@@ -1,19 +1,40 @@
+# Docker comes pre installed in the Github VM.
 name: Using_Containers
 on: push
 jobs:
   docker-container:
     runs-on: ubuntu-latest
-    container:
-      image: node:17-alpine
-      ports:
-        - 3000
-      env:
-        myVariable: 'This is my variable'
-      #? volumes:
-      #?   - "sdfd"
-
+    #! Running a SINGLE container
+    #? container:
+    #?   image: node:17-alpine
+    #?   ports:
+    #?     - 3000
+    #?   env:
+    #?     myVariable: 'This is my variable'
+    #?   volumes:
+    #?     - "sdfd"
+    #! Running MULTIPLE containers
+    # The syntax is like docker-compose
+    services:
+      myClientApp:
+        image: alialaa17/node-api
+        ports:
+          - 3001:3000
+        # To communicate with this mongoDB the url must connect with the mongo service. So instead of localhost should be mongo
+      mongo:
+        image: mongo
+        ports:
+          - 27017:27017
     steps:
-      - name: Log Node version
+      - name: Testing a Post a user
         run: |
-          node -v
-          cat /etc/os-release
+          curl --request POST \
+          --header 'content-type: application/json' \
+          --data '{\"username\": \"Hello\", \"address\": \"World\"}' \
+          --url http://localhost:3001/api/users
+
+      - name: Testing a GET request
+        run: |
+          curl --request GET \
+          --header 'content-type: application/json' \
+          --url http://localhost:3001/api/users

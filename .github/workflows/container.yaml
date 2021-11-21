@@ -37,6 +37,9 @@ jobs:
         myVariable: 'This is my variable'
       #? volumes:
       #?   - "sdfd"
+    steps:
+      - name: Log node version
+        run: node -v
 
   docker-multiple-containers-JOB:
     runs-on: ubuntu-latest

@@ -26,6 +26,8 @@ jobs:
           args: -v
       # Run SCRIPT FILE inside a docker container in STEP level by using the ENTRYPOINT, CMD keywords of a docker file.
       - uses: actions/checkout@v2.4.0
+      - name: Making script executable
+        run: chmod +x ./script.sh
       - name: Using script file in the entrypoint
         uses: docker://node:17-alpine
         # The with keyword is used to add input

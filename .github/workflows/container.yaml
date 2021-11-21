@@ -15,6 +15,7 @@ jobs:
     #?     - "sdfd"
     #! Running MULTIPLE containers
     # The syntax is like docker-compose
+    # Github creates automatically a network between the containers
     services:
       myClientApp:
         image: alialaa17/node-api
@@ -31,7 +32,7 @@ jobs:
           curl --request POST \
           --header 'content-type: application/json' \
           --data '{"username": "Hello", "address": "World"}' \
-          --url http://localhost:3001/api/users
+          --url http://localhost:3001/api/user
 
       - name: Testing a GET request
         run: |

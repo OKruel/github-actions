@@ -33,7 +33,7 @@ jobs:
           # works exactly as the entrypoint keyword in a docker file
           entrypoint: ./script.sh
           # This would act like the CMD command to add more parameters to the entrypoint command.
-          args: My args from the github actions
+          args: 'ARGUMENTS'
 
   docker-multiple-containers-JOB:
     runs-on: ubuntu-latest

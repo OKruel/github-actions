@@ -73,6 +73,7 @@ jobs:
       # [ACTION 1] Copies all files to inside the github virtual machine
       - name: Github CHECKOUT ACTION - bring in the repo files
         # Name of the repository to use the code.
+        #! The uses keyword can be used with actions but also with docker containers
         uses: actions/checkout@v2.4.0 # <user/repository>@<EITHER VERSION OR COMMIT OR BRANCH>
 
       # [COMMAND] Check if the my repository files are inside the virtual machine after CHECKOUT ACTION
@@ -89,7 +90,7 @@ jobs:
         id: greet
         # Actions can take inputs. You can instructions in the repository
         with:
-          # This is the input
+          # The key to this input is specified in the action we are using
           who-to-greet: Olavo
 
       #[COMMAND] Command to test the sintax to acces other steps from this workflow

@@ -2,26 +2,52 @@
 name: Using_Containers
 on: push
 jobs:
-  docker-container:
+  docker-multiple-containers-STEPS:
     runs-on: ubuntu-latest
-    #! Running a SINGLE container
-    #? container:
-    #?   image: node:17-alpine
-    #?   ports:
-    #?     - 3000
-    #?   env:
-    #?     myVariable: 'This is my variable'
-    #?   volumes:
-    #?     - "sdfd"
-    #! Running MULTIPLE containers
+    container:
+      image: node:17-alpine
+    steps:
+      - name: Step with docker container
+        # The uses keyword can be used with actions or docker containers
+        uses: docker://node:alpine-17
+        # The with keyword is used to add input
+        with:
+          # works exactly as the entrypoint keyword in a docker file
+          entrypoint: /bin/echo
+          # This would act like the CMD command to add more parameters to the entrypoint command.
+          args: Hello World
+
+      - name: Another step with another docker container
+        # The uses keyword can be used with actions or docker containers
+        uses: docker://node:alpine-17
+        # The with keyword is used to add input
+        with:
+          # works exactly as the entrypoint keyword in a docker file
+          entrypoint: /usr/local/bin/node
+          # This would act like the CMD command to add more parameters to the entrypoint command.
+          args: -v
+
+  docker-single-container-JOB:
+    runs-on: ubuntu-latest
+    container:
+      image: node:17-alpine
+      ports:
+        - 3000
+      env:
+        myVariable: 'This is my variable'
+      #? volumes:
+      #?   - "sdfd"
+
+  docker-multiple-containers-JOB:
+    runs-on: ubuntu-latest
     # The syntax is like docker-compose
-    # Github creates automatically a network between the containers
     services:
       myClientApp:
         image: alialaa17/node-api
         ports:
           - 3001:3000
-        # To communicate with this mongoDB the url must connect with the mongo service. So instead of localhost should be mongo
+      # Github creates automatically a network between the containers
+      # The url connection to this mongoDB service must be mongo instead of localhost here below the name of the service is specified as mongo (in the app the connection url points to the mongo service)
       mongo:
         image: mongo
         ports:

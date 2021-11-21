@@ -5,6 +5,7 @@ jobs:
   docker-multiple-containers-STEPS:
     runs-on: ubuntu-latest
     container:
+      # Dummy comment here
       image: node:17-alpine
     steps:
       - name: Step with docker container

@@ -1,6 +1,6 @@
 # Docker comes pre installed in the Github VM.
 name: Using_Containers
-on: push
+on: pull_request
 jobs:
   docker-containers-STEPS-and-JOBS:
     runs-on: ubuntu-latest

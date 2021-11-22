@@ -1,0 +1,19 @@
+# This uses a docker hub image inside a docker container in a STEP level.
+# This image is made to send slack messages from Github actions workflow
+name: Send a Slack Message
+on:
+  push:
+    branches:
+      - master
+jobs:
+  Send-Slack-Message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send a slack message
+        # Tha image in Docker Hub contains the instructions to set the environment variables.
+        uses: docker://technosophos/slack-notify
+        env:
+          #! This requires that an app is created in the slack api.
+
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_MESSAGE: 'Hello Slack, sending from my github actions workflow'

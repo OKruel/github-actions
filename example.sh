@@ -22,4 +22,4 @@ curl --verbose \
    --header 'accept: application/vnd.github.v3+json' \
    --header "content-type: application/json" \
    --user "<userName>:<GithubApiKey>" \
-   --data '{"event_type": "action", "client_payload": {"env": "production"}}' <userName >/ <repositoryName >/dispatches
+   --data '{"event_type": "action", "client_payload": {"env": "example of data"}}' <UserName >/ <RepositoryNAme >/dispatches

@@ -31,9 +31,9 @@ jobs:
         # The with keyword is used to add input
         with:
           # works exactly as the entrypoint keyword in a docker file
-          entrypoint: /bin/ls
+          entrypoint: /.script
           # This would act like the CMD command to add more parameters to the entrypoint command.
-          args: -a
+          args: 'ARGUMENT'
 
   docker-multiple-containers-JOB:
     runs-on: ubuntu-latest

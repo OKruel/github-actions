@@ -28,6 +28,7 @@ jobs:
       - uses: actions/checkout@v2.4.0
       - name: Using script file in the entrypoint
         uses: docker://node:17-alpine
+        run: chmod +x ./script.sh
         # The with keyword is used to add input
         with:
           # works exactly as the entrypoint keyword in a docker file

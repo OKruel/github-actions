@@ -6,7 +6,15 @@
 name: Shell Commands
 # Array of events in which a specific job will be performed
 # Can also be a object
-on: [push, pull_request]
+on: 
+  pull_request:
+  workflow_dispatch:
+   inputs:
+     string:
+       description: A string input
+       type: string
+       required: false
+       default: A default value
 # Jobs is an object and a name must be given to the object key.
 jobs:
   # Name of the job

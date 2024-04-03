@@ -6,14 +6,14 @@
 name: Shell Commands
 # Array of events in which a specific job will be performed
 # Can also be a object
-on: [pull_request]
+on: [push, pull_request]
 # Jobs is an object and a name must be given to the object key.
 jobs:
   # Name of the job
   run-shell-command:
     # Operating system in which the virtual machine will run
     # In a linux OS the shell is automatically bash
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     # Steps that will take place. In this case some simple bash commands
     steps:
       # Name of the command
